@@ -54,7 +54,7 @@ export const useElevenLabsConversation = () => {
       
       // Determine which edge function to use based on call type
       const functionName = conversationParams.current?.callType === 'parent' 
-        ? 'elevenlabs-parent-conversation' 
+        ? 'elevenlabs-parent-counseling' 
         : 'elevenlabs-conversation';
       
       // Prepare request body based on call type
