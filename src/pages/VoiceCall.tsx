@@ -70,26 +70,13 @@ const VoiceCall = () => {
   const handleStartCall = async () => {
     if (!callData) return;
     
-    // Update the conversation with actual student data
-    const { data, error } = await supabase.functions.invoke('elevenlabs-conversation', {
-      body: {
-        agentId: 'agent_9401k5c618s9fzkv0m8k76rfww00',
-        phoneNumber: callData.student.phone,
-        studentName: callData.student.name,
-        callType: callData.callType
-      }
+    // Start conversation with student data
+    await startConversation({
+      agentId: 'agent_9401k5c618s9fzkv0m8k76rfww00',
+      phoneNumber: callData.student.phone,
+      studentName: callData.student.name,
+      callType: callData.callType
     });
-
-    if (error) {
-      toast({
-        title: "Connection Failed", 
-        description: error.message,
-        variant: "destructive"
-      });
-      return;
-    }
-
-    await startConversation();
   };
 
   const handleEndCall = async () => {
