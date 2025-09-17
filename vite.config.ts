@@ -5,8 +5,11 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Set base URL for GitHub Pages - change this to your repository name
-  base: mode === "production" ? "/drop-out-prediction-43-sep-56/" : "/",
+  // Set base URL: use repo path on GitHub Actions, root elsewhere (Lovable, local, etc.)
+  base:
+    process.env.GITHUB_ACTIONS === "true"
+      ? `/${(process.env.GITHUB_REPOSITORY || "").split("/")[1]}/`
+      : "/",
   server: {
     host: "::",
     port: 8080,
