@@ -1,0 +1,10 @@
+project_id = "mbmsnedeymbjfywfwskm"
+
+[functions.make-call]
+verify_jwt = true
+
+[functions.call-logs-api]
+verify_jwt = true
+
+[functions.elevenlabs-conversation]
+verify_jwt = true
