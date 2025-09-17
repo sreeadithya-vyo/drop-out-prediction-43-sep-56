@@ -52,28 +52,14 @@ export const useElevenLabsConversation = () => {
       // Request microphone access first
       await navigator.mediaDevices.getUserMedia({ audio: true });
       
-      // Determine which edge function to use based on call type
-      const functionName = conversationParams.current?.callType === 'parent' 
-        ? 'elevenlabs-parent-counseling' 
-        : 'elevenlabs-conversation';
-      
-      // Prepare request body based on call type
-      const requestBody = conversationParams.current?.callType === 'parent' 
-        ? {
-            phoneNumber: conversationParams.current.phoneNumber,
-            studentName: conversationParams.current.studentName,
-            parentName: conversationParams.current.studentName // You might want to pass actual parent name
-          }
-        : conversationParams.current || {
-            agentId: 'agent_9401k5c618s9fzkv0m8k76rfww00',
-            phoneNumber: '+1234567890',
-            studentName: 'Student',
-            callType: 'student'
-          };
-      
-      // Get signed URL from the appropriate edge function
-      const { data, error } = await supabase.functions.invoke(functionName, {
-        body: requestBody
+      // Get signed URL from our edge function
+      const { data, error } = await supabase.functions.invoke('elevenlabs-conversation', {
+        body: conversationParams.current || {
+          agentId: 'agent_9401k5c618s9fzkv0m8k76rfww00',
+          phoneNumber: '+1234567890',
+          studentName: 'Student',
+          callType: 'student'
+        }
       });
 
       if (error) {

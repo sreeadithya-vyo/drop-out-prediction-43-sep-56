@@ -8,9 +8,3 @@ verify_jwt = true
 
 [functions.elevenlabs-conversation]
 verify_jwt = true
-
-[functions.elevenlabs-parent-conversation]
-verify_jwt = true
-
-[functions.elevenlabs-parent-counseling]
-verify_jwt = true
